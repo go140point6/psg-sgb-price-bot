@@ -162,8 +162,8 @@ async function getInitialPrice() {
 
   const WSB_ADDRESS = "0x02f0826ef6ad107cfc861152b32b52fd11bab9ed"
   const wsb = "wsb"
-  const SPRK_ADDRESS = "0xfd2a0fD402828fDB86F9a9D5a760242AD7526cC0"
-  const sprk = "sprk"
+  const psg_ADDRESS = "0xb2987753d1561570f726aa373f48e77e27aa5ff4"
+  const psg = "psg"
 
   //let sgbBN = await ftsoRegistryContract["getCurrentPrice(string)"]("SGB")
   //let sgb = Number(sgbBN._price) / 10 ** 5;
@@ -171,31 +171,31 @@ async function getInitialPrice() {
 
   let arryPrice = await ftsoContract.getAmountsOut(
       ethers.utils.parseEther("1"),
-      [WSB_ADDRESS, SPRK_ADDRESS]
+      [WSB_ADDRESS, psg_ADDRESS]
   )
 
   //console.log(arryPrice[0])
   //console.log(arryPrice[1])
 
   let wsbSGBPrice = Number(arryPrice[0]._hex) / 10 ** 18
-  let sprkSGBPrice = (Number(arryPrice[1]._hex) / 10 ** 18).toFixed(5)
+  let psgSGBPrice = (Number(arryPrice[1]._hex) / 10 ** 18).toFixed(5)
   let wsbUSDPrice = (sgbPrice / wsbSGBPrice).toFixed(5)
-  let sprkUSDPrice = (sgbPrice / sprkSGBPrice).toFixed(5)
+  let psgUSDPrice = (sgbPrice / psgSGBPrice).toFixed(5)
   console.log(wsb + " USD price is " + wsbUSDPrice)
-  console.log(sprk + " USD price is " + sprkUSDPrice)
+  console.log(psg + " USD price is " + psgUSDPrice)
 
   clearRoles()
-  lastPrice = sprkUSDPrice || 0
+  lastPrice = psgUSDPrice || 0
   let symbol = `${process.env.COIN_ID.toUpperCase()}`
   client.user.setPresence({
     activities: [{
-    name: `SGB=${sprkSGBPrice} ${symbol}`,
+    name: `SGB=${psgSGBPrice} ${symbol}`,
     type: `PLAYING`
     }]
   })
 
   arrow = mid
-  client.guilds.cache.find(guild => guild.id === process.env.SERVER_ID).me.setNickname(`${symbol} ${arrow} ${process.env.CURRENCY_SYMBOL}${sprkUSDPrice}`)
+  client.guilds.cache.find(guild => guild.id === process.env.SERVER_ID).me.setNickname(`${symbol} ${arrow} ${process.env.CURRENCY_SYMBOL}${psgUSDPrice}`)
   
   console.log('Initial price to', lastPrice)
   //console.log(`SGB: ${sgbPrice} per ${symbol}`)
@@ -246,8 +246,8 @@ async function getPrices() {
 
   const WSB_ADDRESS = "0x02f0826ef6ad107cfc861152b32b52fd11bab9ed"
   const wsb = "wsb"
-  const SPRK_ADDRESS = "0xfd2a0fD402828fDB86F9a9D5a760242AD7526cC0"
-  const sprk = "sprk"
+  const psg_ADDRESS = "0xb2987753d1561570f726aa373f48e77e27aa5ff4"
+  const psg = "psg"
 
   //let sgbBN = await ftsoRegistryContract["getCurrentPrice(string)"]("SGB")
   //let sgb = Number(sgbBN._price) / 10 ** 5;
@@ -255,25 +255,25 @@ async function getPrices() {
 
   let arryPrice = await ftsoContract.getAmountsOut(
       ethers.utils.parseEther("1"),
-      [WSB_ADDRESS, SPRK_ADDRESS]
+      [WSB_ADDRESS, psg_ADDRESS]
   )
 
   //console.log(arryPrice[0])
   //console.log(arryPrice[1])
 
   let wsbSGBPrice = Number(arryPrice[0]._hex) / 10 ** 18
-  let sprkSGBPrice = (Number(arryPrice[1]._hex) / 10 ** 18).toFixed(5)
+  let psgSGBPrice = (Number(arryPrice[1]._hex) / 10 ** 18).toFixed(5)
   let wsbUSDPrice = (sgbPrice / wsbSGBPrice).toFixed(5)
-  let sprkUSDPrice = (sgbPrice / sprkSGBPrice).toFixed(5)
+  let psgUSDPrice = (sgbPrice / psgSGBPrice).toFixed(5)
   console.log(wsb + " USD price is " + wsbUSDPrice)
-  console.log(sprk + " USD price is " + sprkUSDPrice)
+  console.log(psg + " USD price is " + psgUSDPrice)
 
-  currentPrice = sprkUSDPrice || 0
+  currentPrice = psgUSDPrice || 0
   let symbol = `${process.env.COIN_ID.toUpperCase()}`
   client.user.setPresence({
     activities: [{
     //name: `SGB: ${sgbPrice} per ${symbol}`,
-    name: `SGB=${sprkSGBPrice} ${symbol}`,
+    name: `SGB=${psgSGBPrice} ${symbol}`,
     type: `PLAYING`
     }]
   })
@@ -292,7 +292,7 @@ async function getPrices() {
         console.log('same')
       }
 
-  client.guilds.cache.find(guild => guild.id === process.env.SERVER_ID).me.setNickname(`${symbol} ${arrow} ${process.env.CURRENCY_SYMBOL}${sprkUSDPrice}`)
+  client.guilds.cache.find(guild => guild.id === process.env.SERVER_ID).me.setNickname(`${symbol} ${arrow} ${process.env.CURRENCY_SYMBOL}${psgUSDPrice}`)
 
   //console.log('Current price to', currentPrice)
   //console.log(`SGB: ${sgbPrice} per ${symbol}`)
